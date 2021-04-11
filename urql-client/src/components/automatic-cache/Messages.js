@@ -1,8 +1,8 @@
-import { useQuery, gql } from '@apollo/client'
+import { useQuery, gql } from 'urql'
 import { format } from 'date-fns'
 
-const GET_CHATS = gql`
-  query GetChatsQuery {
+const ChatsQuery = gql`
+  query {
     chats {
       id
       from
@@ -13,16 +13,16 @@ const GET_CHATS = gql`
 `
 
 const Messages = () => {
-  const { loading, error, data } = useQuery(GET_CHATS)
+  const [{ data, fetching, error }] = useQuery({ query: ChatsQuery })
 
-  if (loading) {
+  if (fetching) {
     return <p>Loading...</p>
   }
   if (error) {
     return <p>Error :(</p>
   }
 
-  return data.chats
+  return (data?.chats ?? [])
     .slice()
     .reverse()
     .map(({ id, from, message, timestamp }) => (
