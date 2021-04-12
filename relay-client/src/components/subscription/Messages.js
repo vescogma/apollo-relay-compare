@@ -20,14 +20,14 @@ const Messages = ({ query, queryReference }) => {
   const config = React.useMemo(() => ({
     variables: null,
     subscription: MessagesSubscription,
-    updater: (store, data) => {
+    updater: store => {
       const record = store.getRootField('messageSent')
       const root = store.getRoot()
       const chats = root.getLinkedRecords('chats')
       chats.push(record)
       root.setLinkedRecords(chats, 'chats')
     },
-  }), [MessagesSubscription])
+  }), [])
 
   useSubscription(config)
 

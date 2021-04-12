@@ -17,7 +17,7 @@ function App() {
       }}
     >
       <header style={{ padding: '1rem 2rem' }}>
-        <h2>Apollo Client</h2>
+        <h2>URQL Client</h2>
         <p>State Management Strategy</p>
         <input
           type="radio"

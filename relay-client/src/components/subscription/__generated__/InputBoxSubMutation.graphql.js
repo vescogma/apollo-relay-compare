@@ -30,7 +30,7 @@ export type InputBoxSubMutation = {|
 mutation InputBoxSubMutation(
   $message: String!
 ) {
-  sendMessage(from: "apollo-client", message: $message) {
+  sendMessage(from: "relay-client", message: $message) {
     id
     from
     message
@@ -54,7 +54,7 @@ v1 = [
       {
         "kind": "Literal",
         "name": "from",
-        "value": "apollo-client"
+        "value": "relay-client"
       },
       {
         "kind": "Variable",
@@ -117,16 +117,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "1f3dad2d915dd069f7bd2acfbfb25a53",
+    "cacheID": "3c643ae3f9c9c7473c52531d3470c76f",
     "id": null,
     "metadata": {},
     "name": "InputBoxSubMutation",
     "operationKind": "mutation",
-    "text": "mutation InputBoxSubMutation(\n  $message: String!\n) {\n  sendMessage(from: \"apollo-client\", message: $message) {\n    id\n    from\n    message\n    timestamp\n  }\n}\n"
+    "text": "mutation InputBoxSubMutation(\n  $message: String!\n) {\n  sendMessage(from: \"relay-client\", message: $message) {\n    id\n    from\n    message\n    timestamp\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '448ad403b37a8faab9e35dd445d0cd05';
+(node/*: any*/).hash = '47bb496afa7ae68958108b2dc968f1f3';
 
 module.exports = node;

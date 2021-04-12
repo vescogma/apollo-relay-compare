@@ -30,7 +30,7 @@ export type InputBoxRefetchMutation = {|
 mutation InputBoxRefetchMutation(
   $message: String!
 ) {
-  sendMessage(from: "apollo-client", message: $message) {
+  sendMessage(from: "relay-client", message: $message) {
     id
     from
     message
@@ -54,7 +54,7 @@ v1 = [
       {
         "kind": "Literal",
         "name": "from",
-        "value": "apollo-client"
+        "value": "relay-client"
       },
       {
         "kind": "Variable",
@@ -117,16 +117,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "401b5622b7f3ac16d63f9fca42959bbc",
+    "cacheID": "3d31c4b1f457c114a327929cfbbb0023",
     "id": null,
     "metadata": {},
     "name": "InputBoxRefetchMutation",
     "operationKind": "mutation",
-    "text": "mutation InputBoxRefetchMutation(\n  $message: String!\n) {\n  sendMessage(from: \"apollo-client\", message: $message) {\n    id\n    from\n    message\n    timestamp\n  }\n}\n"
+    "text": "mutation InputBoxRefetchMutation(\n  $message: String!\n) {\n  sendMessage(from: \"relay-client\", message: $message) {\n    id\n    from\n    message\n    timestamp\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '8e26960ee5844ca050d806ae8030404e';
+(node/*: any*/).hash = '09698cae1a399b164b190753a3a7c2f3';
 
 module.exports = node;
