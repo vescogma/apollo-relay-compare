@@ -26,6 +26,7 @@ const ChatSubscription = gql`
 
 const Messages = () => {
   const client = useClient()
+
   const [{ data }] = useSubscription(
     { query: ChatSubscription },
     (chats = [], response) => {
@@ -36,13 +37,13 @@ const Messages = () => {
   const [messages, setMessages] = React.useState([])
 
   React.useEffect(() => {
-    client
-      .query(ChatsQuery)
+    console.log('im running a lot')
+    client.query(ChatsQuery)
       .toPromise()
       .then(res => {
         setInitial(res.data.chats.slice().reverse())
       })
-  }, [])
+  }, [client])
 
   React.useEffect(() => {
     setMessages([...(data ?? []), ...initial])

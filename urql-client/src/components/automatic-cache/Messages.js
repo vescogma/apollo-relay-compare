@@ -1,7 +1,8 @@
+import React from 'react'
 import { useQuery, gql } from 'urql'
 import { format } from 'date-fns'
 
-const ChatsQuery = gql`
+const query = gql`
   query {
     chats {
       id
@@ -13,7 +14,8 @@ const ChatsQuery = gql`
 `
 
 const Messages = () => {
-  const [{ data, fetching, error }] = useQuery({ query: ChatsQuery })
+  const context = React.useMemo(() => ({ additionalTypenames: ['Chat'] }), [])
+  const [{ data, fetching, error }] = useQuery({ query, context })
 
   if (fetching) {
     return <p>Loading...</p>

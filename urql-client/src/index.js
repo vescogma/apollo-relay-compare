@@ -6,6 +6,7 @@ import {
   defaultExchanges,
   subscriptionExchange,
 } from 'urql'
+import { devtoolsExchange } from '@urql/devtools'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 import './index.css'
 import App from './App'
@@ -18,6 +19,7 @@ const subscriptionClient = new SubscriptionClient('ws://localhost:4000', {
 const client = createClient({
   url: 'http://localhost:4000',
   exchanges: [
+    devtoolsExchange,
     ...defaultExchanges,
     subscriptionExchange({
       forwardSubscription(operation) {
