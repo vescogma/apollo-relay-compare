@@ -14,8 +14,9 @@ const query = gql`
 `
 
 const Messages = () => {
-  const context = React.useMemo(() => ({ additionalTypenames: ['Chat'] }), [])
-  const [{ data, fetching, error }] = useQuery({ query, context })
+  // const context = React.useMemo(() => ({ additionalTypenames: ['Chat'] }), [])
+  // const [{ data, fetching, error }] = useQuery({ query, context })
+  const [{ data, fetching, error }] = useQuery({ query })
 
   if (fetching) {
     return <p>Loading...</p>

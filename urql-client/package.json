@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@urql/devtools": "^2.0.3",
+    "@urql/exchange-graphcache": "^4.0.0",
     "date-fns": "^2.20.1",
     "graphql": "^15.5.0",
     "react": "^17.0.2",
@@ -17,8 +18,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "schema": "get-graphql-schema http://localhost:4000 -j > ./src/schema.json",
+    "start": "yarn schema && react-scripts start",
+    "build": "yarn schema && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -39,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "get-graphql-schema": "^2.1.2"
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSubscription, useClient, gql } from 'urql'
+import { useSubscription, gql, useQuery } from 'urql'
 import { format } from 'date-fns'
 
 const ChatsQuery = gql`
@@ -25,56 +25,54 @@ const ChatSubscription = gql`
 `
 
 const Messages = () => {
-  const client = useClient()
+  const [{ data, fetching, error }] = useQuery({
+    query: ChatsQuery,
+    requestPolicy: 'network-only',
+  })
 
-  const [{ data }] = useSubscription(
+  useSubscription(
     { query: ChatSubscription },
     (chats = [], response) => {
       return [response.messageSent, ...chats]
     },
   )
-  const [initial, setInitial] = React.useState([])
-  const [messages, setMessages] = React.useState([])
 
-  React.useEffect(() => {
-    console.log('im running a lot')
-    client.query(ChatsQuery)
-      .toPromise()
-      .then(res => {
-        setInitial(res.data.chats.slice().reverse())
-      })
-  }, [client])
+  if (fetching) {
+    return <p>Loading...</p>
+  }
+  if (error) {
+    return <p>Error :(</p>
+  }
 
-  React.useEffect(() => {
-    setMessages([...(data ?? []), ...initial])
-  }, [initial, data])
-
-  return (messages ?? []).map(({ id, from, message, timestamp }) => (
-    <div key={id}>
-      <p>
-        <span>
-          <b>
-            <code>time&nbsp;</code>
-          </b>{' '}
-          {format(timestamp, 'HH:mm:ss')}
-        </span>
-        <br />
-        <span>
-          <b>
-            <code>from&nbsp;</code>
-          </b>{' '}
-          {from}
-        </span>
-        <br />
-        <span>
-          <b>
-            <code>text&nbsp;</code>
-          </b>{' '}
-          {message}
-        </span>
-      </p>
-    </div>
-  ))
+  return data.chats
+    .slice()
+    .reverse()
+    .map(({ id, from, message, timestamp }) => (
+      <div key={id}>
+        <p>
+          <span>
+            <b>
+              <code>time&nbsp;</code>
+            </b>{' '}
+            {format(timestamp, 'HH:mm:ss')}
+          </span>
+          <br />
+          <span>
+            <b>
+              <code>from&nbsp;</code>
+            </b>{' '}
+            {from}
+          </span>
+          <br />
+          <span>
+            <b>
+              <code>text&nbsp;</code>
+            </b>{' '}
+            {message}
+          </span>
+        </p>
+      </div>
+    ))
 }
 
 export default Messages
